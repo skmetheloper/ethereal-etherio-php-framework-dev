@@ -1,0 +1,23 @@
+{
+    "name": "etherio/ethereal-dev-framework",
+    "description": "The PHP Framework for Etherio by Ethereal",
+    "authors": [
+        {
+            "name": "SAUNGMIN",
+            "email": "ethereal97@gmail.com",
+            "homepage": "https://github.com/etherio"
+        }
+    ],
+    "require": {
+        "php": "^7.2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Ethereal\\": "src/Ethereal/"
+        },
+        "files": [
+            "src/Ethereal/helper.php"
+        ]
+    }
+}
