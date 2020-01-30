@@ -16,7 +16,7 @@ class Application
 
     /**
      * Get the instance of current application
-     * 
+     *
      * @return \Ethereal\Foundation\Application
      */
     public static function getInstance()
@@ -26,7 +26,7 @@ class Application
 
     /**
      * Get absoulte path from base path
-     * 
+     *
      * @param  null|string $path
      * @return string
      */
