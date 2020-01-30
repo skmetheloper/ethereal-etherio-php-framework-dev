@@ -17,7 +17,7 @@
             "Ethereal\\": "src/Ethereal/"
         },
         "files": [
-            "src/Ethereal/helper.php"
+            "src/Ethereal/Support/helper.php"
         ]
     }
 }

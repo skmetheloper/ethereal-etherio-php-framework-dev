@@ -6,4 +6,6 @@ $app = new Ethereal\Foundation\Application(
     dirname(__DIR__)
 );
 
-echo '<pre>', PHP_EOL, var_dump($app), PHP_EOL, '</pre>', PHP_EOL;
+echo '<pre>', PHP_EOL;
+var_dump($app);
+echo PHP_EOL, '</pre>';
