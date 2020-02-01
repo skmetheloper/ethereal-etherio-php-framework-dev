@@ -7,6 +7,11 @@ return [
 
     'alias' => [
         'App' => Ethereal\Support\Facade\App::class,
+        'Route' => Ethereal\Support\Facade\Route::class,
+    ],
+
+    'services' => [
+        'route' => Ethereal\Routing\Router::class,
     ],
 
     'timezone' => 'Asia/Yangon',

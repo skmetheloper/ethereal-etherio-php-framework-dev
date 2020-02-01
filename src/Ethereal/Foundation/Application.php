@@ -74,6 +74,18 @@ class Application
     protected $configs = [];
 
     /**
+     *
+     * @var array
+     */
+    protected $instances = [];
+
+    /**
+     *
+     * @var array
+     */
+    protected $services = [];
+
+    /**
      * @var boolean
      */
     protected $hasBeenLoaded = false;
@@ -91,6 +103,7 @@ class Application
         $this->loadBaseServices(
             new Environment($this, true)
         );
+        $this->instance('app', $this);
     }
 
     protected function bindBasePaths()
@@ -106,8 +119,44 @@ class Application
 
     protected function loadBaseServices(Environment $env)
     {
-        // ...
+        if ($alias = config('app.alias')) {
+            $this->createFacade(new AliasLoader, $alias);
+        }
+
+        if ($services = config('app.services')) {
+            foreach ($services as $service => $instance) {
+                $this->services[$service] = new $instance;
+            }
+        }
         $this->hasBeenLoaded = true;
+    }
+
+    protected function createFacade(AliasLoader $loader, array $alias)
+    {
+        foreach ($alias as $alias_name => $alias_class) {
+            $loader->make($alias_name, $alias_class);
+        }
+
+        return $loader;
+    }
+
+    public function instance(string $accessor, object $instance = null)
+    {
+        if (is_null($instance)) {
+            return key_exists($accessor, $this->instances)
+                ? $this->instances[$accessor]['instance']
+                : null;
+        }
+
+        if (key_exists($accessor, $this->instances)) {
+            return false;
+        }
+
+        $this->instances[$accessor] = [
+            'instance' => $instance,
+        ];
+
+        return true;
     }
 
     /**

@@ -2,10 +2,10 @@
 
 namespace Ethereal\Support\Facade;
 
-class App extends Facade
+class Route extends Facade
 {
     public static function getFacadeAccessorName()
     {
-        return 'app';
+        return 'route';
     }
 }
