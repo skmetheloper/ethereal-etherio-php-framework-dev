@@ -2,6 +2,7 @@
 
 namespace Ethereal\Support;
 
+use Exception;
 use Ethereal\Foundation\Application;
 
 abstract class ServiceProvider
@@ -32,7 +33,7 @@ abstract class ServiceProvider
     public function init()
     {
         if ($this->registered) {
-            throw new Error(static::class.' was already registered');
+            throw new Exception(static::class.' was already registered');
         }
         $this->register();
         $this->registered = true;
