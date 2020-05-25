@@ -2,13 +2,22 @@
 
 namespace Ethereal\Routing;
 
-class RouteServiceProvider
+use Ethereal\Support\ServiceProvider;
+
+class RouteServiceProvider extends ServiceProvider
 {
     protected $router;
 
-    public function __construct(Router $router)
+    public function register()
     {
-        $this->router = $router;
+        $this->app->bind('routes', function () {
+            return $this->router;
+        });
+    }
+
+    public function boot()
+    {
+        $this->app->instance('route', new Router);
     }
 
     public function get($path, $callback)
