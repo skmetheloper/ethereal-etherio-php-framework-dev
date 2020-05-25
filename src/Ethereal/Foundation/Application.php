@@ -2,6 +2,9 @@
 
 namespace Ethereal\Foundation;
 
+use RuntimeException;
+use Ethereal\Support\ServiceProvider;
+
 class Application
 {
     /**
@@ -86,6 +89,12 @@ class Application
     protected $services = [];
 
     /**
+     *
+     * @var \Ethereal\Support\ServiceProvider[]
+     */
+    protected $providers = [];
+
+    /**
      * @var boolean
      */
     protected $hasBeenLoaded = false;
@@ -119,6 +128,9 @@ class Application
 
     protected function loadBaseServices(Environment $env)
     {
+        if ($this->hasBeenLoaded) {
+            return;
+        }
         if ($alias = config('app.alias')) {
             $this->createFacade(new AliasLoader, $alias);
         }
@@ -143,20 +155,32 @@ class Application
     public function instance(string $accessor, object $instance = null)
     {
         if (is_null($instance)) {
-            return key_exists($accessor, $this->instances)
-                ? $this->instances[$accessor]['instance']
-                : null;
+            //* Get an instance by accessor name
+            if (! key_exists($accessor, $this->instances)) {
+                throw new RuntimeException('Undefined accessor ['.$accessor.'] name in application instances');
+            }
+            return $this->instances[$accessor];
         }
 
         if (key_exists($accessor, $this->instances)) {
-            return false;
+            throw new RuntimeException('Duplicated accessor ['.$accessor.'] name in application instances');
         }
 
-        $this->instances[$accessor] = [
-            'instance' => $instance,
-        ];
+        $this->instances[$accessor] = $instance;
+    }
 
-        return true;
+    /**
+     * Register new service provider
+     *
+     * @param  \Ethereal\Support\ServerProvider $provider
+     *
+     * @return void
+     */
+    public function register(ServiceProvider $provider)
+    {
+        $provider->init();
+
+        array($this->providers, $provider);
     }
 
     /**
