@@ -180,7 +180,7 @@ class Application
     {
         $provider->init();
 
-        array($this->providers, $provider);
+        array_push($this->providers, $provider);
     }
 
     /**
