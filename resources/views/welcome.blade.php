@@ -8,16 +8,16 @@
         @auth
             <div class="card user status">
                 <div class="card title">
-                    <a class="card link underline">{{ user.name }}</a>
+                    <a class="card link underline">@user::name</a>
                 </div>
                 <div class="card message">
-                    <a class="card info tag">{{ user.role }}</a>
+                    <a class="card info tag">@user::role</a>
                 </div>
             </div>
-            <a class="button outline logout" href="@route('logout')">{{ route.name }}</a>
+            <a class="button outline logout" href="@route::path('logout')">Logout</a>
         @guest
-            <a class="button login" href="@route('login')">{{ route.name }}</a>
-            <a class="button clean register" href="@route('register')">Create an account</a>
+            <a class="button login" href="@route::path('login')">Log In</a>
+            <a class="button clean register" href="@route::path('register')">Create an account</a>
         @endauth
         </div>
     </div>
