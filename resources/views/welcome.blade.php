@@ -8,10 +8,10 @@
         @auth
             <div class="card user status">
                 <div class="card title">
-                    <a class="card link underline">@user::name</a>
+                    <a class="card link underline">@user[name]</a>
                 </div>
                 <div class="card message">
-                    <a class="card info tag">@user::role</a>
+                    <a class="card info tag">@user[role]</a>
                 </div>
             </div>
             <a class="button outline logout" href="@route::path('logout')">Logout</a>
