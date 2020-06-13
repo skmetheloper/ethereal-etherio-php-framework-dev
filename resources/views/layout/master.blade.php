@@ -7,8 +7,8 @@
     <meta name="og:description" content="@config('app.description', 'The PHP Web Development Framework by Ethereal For Etherio')" />
     <meta name="og:title" content="{{ $title ?? 'Document' }}" />
     <title>{{ $title ?? 'Document' }} - @config('app.name', 'Ethereal')</title>
-    <link rel="stylesheet" herf="https://cdn.etherio.net/normalize/normalize.css' />
-    <link rel="stylesheet" herf="https://cdn.etherio.net/milligram/milligram.css' />
+    <link rel="stylesheet" herf="https://cdn.etherio.net/normalize/normalize.css" />
+    <link rel="stylesheet" herf="https://cdn.etherio.net/milligram/milligram.css" />
     @yield('style')
 </head>
 
